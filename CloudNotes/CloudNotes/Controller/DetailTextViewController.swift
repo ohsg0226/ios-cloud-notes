@@ -18,6 +18,7 @@ class DetailTextViewController: UIViewController {
     
     let detailTextView: UITextView = {
         let detailTextView = UITextView()
+        detailTextView.font = UIFont.systemFont(ofSize: 18)
         detailTextView.translatesAutoresizingMaskIntoConstraints = false
         
         return detailTextView
