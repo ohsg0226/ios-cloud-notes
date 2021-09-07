@@ -16,7 +16,7 @@ class DetailTextViewController: UIViewController {
     static let identifier = "DetailTextViewController"
     weak var detailTextViewControllerDelegate: DetailTextViewControllerDelegate?
     
-    let detailTextView: UITextView = {
+    private let detailTextView: UITextView = {
         let detailTextView = UITextView()
         detailTextView.font = UIFont.systemFont(ofSize: 18)
         detailTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -24,7 +24,7 @@ class DetailTextViewController: UIViewController {
         return detailTextView
     }()
     
-    func addView() {
+    private func addView() {
         view.addSubview(detailTextView)
     }
     

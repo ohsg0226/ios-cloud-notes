@@ -13,8 +13,8 @@ protocol MenuTableViewControllerDelegate: AnyObject {
 
 class MenuTableViewController: UITableViewController {
     
-    weak var delegate: MenuTableViewControllerDelegate?
-    var memoList = [Memo]()
+    private weak var delegate: MenuTableViewControllerDelegate?
+    private var memoList = [Memo]()
     
     init(style: UITableView.Style, buttonDelegate: MenuTableViewControllerDelegate) {
         super.init(style: style)
