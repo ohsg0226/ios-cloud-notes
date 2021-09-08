@@ -31,6 +31,39 @@ class DetailTextViewController: UIViewController {
     override func viewDidLoad() {
         addView()
         textViewLayout()
+        addKeyboardObserver()
+    }
+    
+    private func addKeyboardObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(addKeyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(addKeyboardWiilHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    @objc private func addKeyboardWillShow(_ notification: Notification) {
+        guard let userInfo = notification.userInfo, let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        let contentInset = UIEdgeInsets(
+            top: 0.0,
+            left: 0.0,
+            bottom: keyboardFrame.size.height,
+            right: 0.0)
+        
+        detailTextView.contentInset.bottom = keyboardFrame.height
+        detailTextView.scrollIndicatorInsets = contentInset
+    }
+    
+    @objc private func addKeyboardWiilHide(_ notification: Notification) {
+        let contentInset = UIEdgeInsets.zero
+        detailTextView.contentInset = contentInset
+        detailTextView.scrollIndicatorInsets = contentInset
     }
     
     private func textViewLayout() {
