@@ -12,7 +12,7 @@ class MemoListCell: UITableViewCell {
     static var identifier = "MemoListCell"
     
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = UIFont.boldSystemFont(ofSize: 30)
@@ -20,7 +20,7 @@ class MemoListCell: UITableViewCell {
         return titleLabel
     }()
     
-    let dateLabel: UILabel = {
+    private let dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.font = UIFont.systemFont(ofSize: 14)
@@ -28,7 +28,7 @@ class MemoListCell: UITableViewCell {
         return dateLabel
     }()
     
-    let descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.font = UIFont.systemFont(ofSize: 14)
@@ -46,7 +46,16 @@ class MemoListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addContentView() {
+    func configure(memoInfo: Memo) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        
+        titleLabel.text = memoInfo.title
+        dateLabel.text = dateFormatter.string(from: memoInfo.lastModifiedDate)
+        descriptionLabel.text = memoInfo.description
+    }
+    
+    private func addContentView() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(dateLabel)
         contentView.addSubview(descriptionLabel)

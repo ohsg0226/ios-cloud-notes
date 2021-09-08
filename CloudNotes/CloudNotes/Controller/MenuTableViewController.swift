@@ -42,14 +42,11 @@ class MenuTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MemoListCell.identifier, for: indexPath) as? MemoListCell else {
             return UITableViewCell()
         }
-        cell.titleLabel.text = memoList[indexPath.row].title
-        cell.dateLabel.text = dateFormatter.string(from: memoList[indexPath.row].lastModifiedDate)
-        cell.descriptionLabel.text = memoList[indexPath.row].description
+        let memoInfo = memoList[indexPath.row]
+        cell.configure(memoInfo: memoInfo)
         cell.accessoryType = .disclosureIndicator
         return cell
     }
