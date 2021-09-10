@@ -14,6 +14,7 @@ protocol DetailTextViewControllerDelegate: AnyObject {
 class DetailTextViewController: UIViewController {
     
     static let identifier = "DetailTextViewController"
+    private let lineBreak = "\n\n"
     weak var detailTextViewControllerDelegate: DetailTextViewControllerDelegate?
     
     private let detailTextView: UITextView = {
@@ -77,8 +78,8 @@ class DetailTextViewController: UIViewController {
 }
 
 extension DetailTextViewController: MenuTableViewControllerDelegate {
-    func didTapTableItem(data: String) {
-        detailTextView.text = data
+    func didTapTableItem(data: Memo) {
+        detailTextView.text = data.title + lineBreak + data.description
         detailTextViewControllerDelegate?.showDetailTextView()
     }
 }

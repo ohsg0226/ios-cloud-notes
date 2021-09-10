@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MenuTableViewControllerDelegate: AnyObject {
-    func didTapTableItem(data: String)
+    func didTapTableItem(data: Memo)
 }
 
 class MenuTableViewController: UITableViewController {
@@ -53,7 +53,7 @@ class MenuTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let detailText = memoList[indexPath.row].description
+        let detailText = memoList[indexPath.row]
         delegate?.didTapTableItem(data: detailText)
     }
 }
