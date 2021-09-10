@@ -31,6 +31,7 @@ class DetailTextViewController: UIViewController {
     
     override func viewDidLoad() {
         addView()
+        addCircleButton()
         textViewLayout()
         addKeyboardObserver()
     }
@@ -45,6 +46,28 @@ class DetailTextViewController: UIViewController {
                                                selector: #selector(addKeyboardWiilHide),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
+    }
+    
+    private func addCircleButton() {
+        let circleButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"),
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(presentActionSheet))
+        
+        navigationItem.rightBarButtonItem = circleButton
+    }
+    
+    @objc private func presentActionSheet() {
+        let actionsheetController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let shared = UIAlertAction(title: "Share...", style: .default, handler: nil)
+        let delete = UIAlertAction(title: "Delete", style: .destructive, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        actionsheetController.addAction(shared)
+        actionsheetController.addAction(delete)
+        actionsheetController.addAction(cancel)
+        
+        present(actionsheetController, animated: true, completion: nil)
     }
     
     @objc private func addKeyboardWillShow(_ notification: Notification) {
