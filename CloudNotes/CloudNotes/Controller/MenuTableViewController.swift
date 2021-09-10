@@ -20,13 +20,27 @@ class MenuTableViewController: UITableViewController {
         super.init(style: style)
         delegate = buttonDelegate
         title = "메모"
-        let plusButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+        let plusButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add))
+        
         navigationItem.rightBarButtonItem = plusButton
         tableView.register(MemoListCell.self, forCellReuseIdentifier: MemoListCell.identifier)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func add() {
+        let actionsheetController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let shared = UIAlertAction(title: "Share...", style: .default, handler: nil)
+        let delete = UIAlertAction(title: "Delete", style: .destructive, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        actionsheetController.addAction(shared)
+        actionsheetController.addAction(delete)
+        actionsheetController.addAction(cancel)
+        
+        present(actionsheetController, animated: true, completion: nil)
     }
     
     func makeTest() {
