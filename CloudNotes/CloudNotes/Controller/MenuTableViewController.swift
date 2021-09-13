@@ -37,7 +37,9 @@ class MenuTableViewController: UITableViewController {
         }
         memoList = memoData
     }
-    
+}
+
+extension MenuTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memoList.count
     }
