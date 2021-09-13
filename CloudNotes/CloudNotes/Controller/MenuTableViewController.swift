@@ -57,4 +57,17 @@ class MenuTableViewController: UITableViewController {
         let detailText = memoList[indexPath.row]
         delegate?.didTapTableItem(data: detailText)
     }
+    
+    override func tableView(_ tableView: UITableView,
+                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let share = UIContextualAction(style: .normal, title: "공유") { _, _, completionHandler  in
+            print("share button tapped")
+            completionHandler(true)
+        }
+        let delete = UIContextualAction(style: .destructive, title: "삭제") { _, _, completionHandler  in
+            print("delete button tapped")
+            completionHandler(true)
+        }
+        return UISwipeActionsConfiguration(actions: [delete, share])
+    }
 }
