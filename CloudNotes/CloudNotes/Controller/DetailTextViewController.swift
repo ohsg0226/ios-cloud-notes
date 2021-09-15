@@ -101,6 +101,9 @@ class DetailTextViewController: UIViewController {
 }
 
 extension DetailTextViewController: MenuTableViewControllerDelegate {
+    func didTapPlusButton() {
+        detailTextViewControllerDelegate?.showDetailTextView()
+    }
     func didTapTableItem(data: Memo) {
         detailTextView.text = data.title + lineBreak + data.description
         detailTextViewControllerDelegate?.showDetailTextView()

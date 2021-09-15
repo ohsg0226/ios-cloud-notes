@@ -8,6 +8,7 @@
 import UIKit
 
 protocol MenuTableViewControllerDelegate: AnyObject {
+    func didTapPlusButton()
     func didTapTableItem(data: Memo)
 }
 
@@ -20,7 +21,7 @@ class MenuTableViewController: UITableViewController {
         super.init(style: style)
         delegate = buttonDelegate
         title = "메모"
-        let plusButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+        let plusButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapPlusButton))
         
         navigationItem.rightBarButtonItem = plusButton
         tableView.register(MemoListCell.self, forCellReuseIdentifier: MemoListCell.identifier)
@@ -36,6 +37,10 @@ class MenuTableViewController: UITableViewController {
             return
         }
         memoList = memoData
+    }
+    
+    @objc func didTapPlusButton() {
+        delegate?.didTapPlusButton()
     }
 }
 
