@@ -17,7 +17,7 @@ class DetailTextViewController: UIViewController {
     private let lineBreak = "\n\n"
     weak var detailTextViewControllerDelegate: DetailTextViewControllerDelegate?
     
-    private let detailTextView: UITextView = {
+    private var detailTextView: UITextView = {
         let detailTextView = UITextView()
         detailTextView.font = UIFont.systemFont(ofSize: 18)
         detailTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -102,6 +102,7 @@ class DetailTextViewController: UIViewController {
 
 extension DetailTextViewController: MenuTableViewControllerDelegate {
     func didTapPlusButton() {
+        detailTextView.text = nil
         detailTextViewControllerDelegate?.showDetailTextView()
     }
     func didTapTableItem(data: Memo) {

@@ -54,7 +54,7 @@ class MemoManager {
         return list
     }
     
-    func save(title: String, contents: String) throws {
+    func save(title: String?, contents: String?) throws {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             throw MemoError.save
         }
@@ -75,14 +75,14 @@ class MemoManager {
         }
     }
     
-    func delete(index: Int) throws {
+    func delete(object: NSManagedObject) throws {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             throw MemoError.delete
         }
         let context = appDelegate.persistentContainer.viewContext
+        context.delete(object)
         do {
             try context.save()
-            list.remove(at: index)
         } catch {
             context.rollback()
         }

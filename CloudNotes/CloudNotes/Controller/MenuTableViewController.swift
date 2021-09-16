@@ -65,16 +65,29 @@ extension MenuTableViewController {
         delegate?.didTapTableItem(data: detailText)
     }
     
-    override func tableView(_ tableView: UITableView,
-                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let share = UIContextualAction(style: .normal, title: "공유") { _, _, completionHandler  in
-            print("share button tapped")
-            completionHandler(true)
-        }
-        let delete = UIContextualAction(style: .destructive, title: "삭제") { _, _, completionHandler  in
-            print("delete button tapped")
-            completionHandler(true)
-        }
-        return UISwipeActionsConfiguration(actions: [delete, share])
+//    override func tableView(_ tableView: UITableView,
+//                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let object = self.memoList[indexPath.row]
+//        let share = UIContextualAction(style: .normal, title: "공유") { _, _, completionHandler  in
+//            print("share button tapped")
+//            completionHandler(true)
+//        }
+//        let delete = UIContextualAction(style: .destructive, title: "삭제") { _, _, _ in
+//            do {
+//                try MemoManager.shared.delete(object: object)
+//                me
+//            } catch {
+//
+//            }
+//        }
+//        return UISwipeActionsConfiguration(actions: [delete, share])
+//    }
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        self.memoList.remove(at: indexPath.row)
+        self.tableView.deleteRows(at: [indexPath], with: .fade)
+        
     }
 }
